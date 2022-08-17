@@ -5,8 +5,7 @@ import 'package:shopping_cart_flutter/src/domain/products/product_repository.dar
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-const products =
-    '''[
+var products = '''[
   {
     "id": "1",
     "image":
@@ -139,17 +138,15 @@ class ProductInMemoryRepository implements ProductRepository {
   @override
   Future<List<Product>> get() async {
     final sharedPreferences = await SharedPreferences.getInstance();
+
     var token = sharedPreferences.getString("token");
 /*
-    final response = await http.get(
-        Uri.parse(
-            "http://localhost:7000/mff-administracion/producto/buscarTodosActivos"),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token'
-        });
-
-    var jsonResponse = json.decode(response.body);
+    final response = await http.get(Uri.parse(
+        "http://localhost:4042/mff-administracion/producto/buscarTodosActivos"));
+    //var jsonResponse = json.decode(response.body);
+    products = response.body;
+    print(response.body);
+    print(products);
 */
     return Future.delayed(
         const Duration(seconds: 2), () => _parse(jsonDecode(products)));

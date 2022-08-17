@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
     var jsonResponse = null;
 
     var response = await http.post(
-        Uri.parse("http://localhost:7000/api/auth/logincliente"),
+        Uri.parse("http://localhost:4040/api/authcliente/login"),
         body: data);
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
