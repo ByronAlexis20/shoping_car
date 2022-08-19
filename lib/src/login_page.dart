@@ -153,7 +153,9 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           _isLoading = false;
         });
+        var codigoUsuario = jsonResponse['codUsuario'];
         sharedPreferences.setString("token", jsonResponse['token']);
+        sharedPreferences.setString("idCliente", codigoUsuario.toString());
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (BuildContext context) => App()),
             (Route<dynamic> route) => false);

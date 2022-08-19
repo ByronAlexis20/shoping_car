@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shopping_cart_flutter/src/presentation/cart/cart_state.dart';
+import 'dart:convert';
 
 class CartContentItem extends StatelessWidget {
   final CartItemState _cartItemState;
   final TextEditingController _quantityController = TextEditingController();
-  final void Function(CartItemState cartItemState) _removeItemFromCartCallback;
+  final void Function(CartItemState cartItemState, int tipo)
+      _removeItemFromCartCallback;
   final void Function(CartItemState cartItemState, int quantity)
       _editQuantityOfCartItemCallback;
 
@@ -28,15 +30,11 @@ class CartContentItem extends StatelessWidget {
       }
     });
 
-    final imageWidget = Image.network(
-      _cartItemState.image,
-      height: 120.0,
-    );
+    final imageWidget = Image.memory(base64Decode(_cartItemState.image));
 
     final descriptionWidget = Column(children: <Widget>[
       Text(
         _cartItemState.title,
-        //style: Theme.of(context).textTheme.subhead,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),
@@ -47,15 +45,12 @@ class CartContentItem extends StatelessWidget {
                   controller: _quantityController,
                   decoration: const InputDecoration(labelText: 'Cantidad'),
                   keyboardType: TextInputType.number,
-                  inputFormatters: [
-                //WhitelistingTextInputFormatter.digitsOnly
-              ])),
+                  inputFormatters: [])),
           Expanded(
               child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
                     _cartItemState.price,
-                    //style: Theme.of(context).textTheme.subhead
                   ))),
         ],
       )
@@ -76,7 +71,7 @@ class CartContentItem extends StatelessWidget {
               Expanded(flex: 3, child: descriptionWidget),
               IconButton(
                 icon: Icon(Icons.clear),
-                onPressed: () => _removeItemFromCartCallback(_cartItemState),
+                onPressed: () => _removeItemFromCartCallback(_cartItemState, 1),
               )
             ],
           ),

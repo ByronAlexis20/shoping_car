@@ -7,7 +7,8 @@ class CartDrawer extends StatelessWidget {
   final CartState _cartState;
   final void Function(CartItemState cartItemState, int quantity)
       _editQuantityOfCartItemCallback;
-  final void Function(CartItemState cartItemState) _removeItemFromCartCallback;
+  final void Function(CartItemState cartItemState, int tipo)
+      _removeItemFromCartCallback;
 
   const CartDrawer(this._cartState, this._editQuantityOfCartItemCallback,
       this._removeItemFromCartCallback);

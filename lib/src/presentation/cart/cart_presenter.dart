@@ -33,7 +33,7 @@ class CartPresenter {
 
   Future<void> init(OnCartChanged onCartChanged) async {
     _onCartChanged = onCartChanged;
-    _products =  await _getProductsUseCase.execute();
+    _products = await _getProductsUseCase.execute();
     _loadCart();
   }
 
@@ -47,11 +47,15 @@ class CartPresenter {
     });
   }
 
-  void removeCartItemOfCart(CartItemState cartItemState) {
-    final CartItem cartItem =
-        _cart.items.firstWhere((cartItem) => cartItem.id == cartItemState.id);
-
-    _removeItemFromCartUseCase.execute(cartItem).then((cart) {
+  void removeCartItemOfCart(CartItemState cartItemState, int tipo) {
+    CartItem cartItem;
+    if (cartItemState == null) {
+      cartItem = null;
+    } else {
+      cartItem =
+          _cart.items.firstWhere((cartItem) => cartItem.id == cartItemState.id);
+    }
+    _removeItemFromCartUseCase.execute(cartItem, tipo).then((cart) {
       _cart = cart;
       _render(cart);
     });

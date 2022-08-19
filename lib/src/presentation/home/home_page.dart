@@ -37,8 +37,8 @@ class _HomePageState extends State<HomePage> {
     widget._cartPresenter.addProductToCartCart(productItemState);
   }
 
-  void _removeItemFromCart(CartItemState cartItemState) {
-    widget._cartPresenter.removeCartItemOfCart(cartItemState);
+  void _removeItemFromCart(CartItemState cartItemState, int tipo) {
+    widget._cartPresenter.removeCartItemOfCart(cartItemState, tipo);
   }
 
   void _editQuantityOfCartItem(CartItemState cartItemState, int quantity) {

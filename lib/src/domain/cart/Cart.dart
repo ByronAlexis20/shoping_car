@@ -36,9 +36,15 @@ class Cart {
     }
   }
 
-  Cart removeItem(CartItem itemToRemove) {
-    final newItems = items.where((item) => item.id != itemToRemove.id).toList();
-
+  Cart removeItem(CartItem itemToRemove, int tipo) {
+    var newItems;
+    if (tipo == 0) {
+      print("es cero");
+      newItems = items.where((item) => item.id == tipo).toList();
+    } else {
+      print("no es cero");
+      newItems = items.where((item) => item.id != itemToRemove.id).toList();
+    }
     return Cart(newItems);
   }
 

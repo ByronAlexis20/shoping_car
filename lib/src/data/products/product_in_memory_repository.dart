@@ -140,14 +140,11 @@ class ProductInMemoryRepository implements ProductRepository {
     final sharedPreferences = await SharedPreferences.getInstance();
 
     var token = sharedPreferences.getString("token");
-/*
+
     final response = await http.get(Uri.parse(
         "http://localhost:4042/mff-administracion/producto/buscarTodosActivos"));
-    //var jsonResponse = json.decode(response.body);
     products = response.body;
-    print(response.body);
-    print(products);
-*/
+
     return Future.delayed(
         const Duration(seconds: 2), () => _parse(jsonDecode(products)));
   }

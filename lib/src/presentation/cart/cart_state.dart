@@ -6,7 +6,7 @@ class CartState {
   CartState(this.totalPrice, this.totalItems, this.items);
 
   factory CartState.createEmpty() {
-    return CartState('0 €', 0, []);
+    return CartState('0 ', 0, []);
   }
 }
 

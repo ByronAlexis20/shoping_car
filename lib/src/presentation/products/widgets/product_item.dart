@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shopping_cart_flutter/src/presentation/products/products_state.dart';
 
@@ -15,11 +17,9 @@ class ProductItem extends StatelessWidget {
         child: Column(
       children: <Widget>[
         Expanded(
-            flex: 5,
-            child: Image.network(
-              _productItem.image,
-              fit: BoxFit.fitWidth,
-            )),
+          flex: 5,
+          child: Image.memory(base64Decode(_productItem.image)),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
