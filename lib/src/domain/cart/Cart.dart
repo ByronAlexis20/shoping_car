@@ -22,7 +22,7 @@ class Cart {
       final newItems = items.map((oldItem) {
         if (oldItem.id == item.id) {
           return CartItem(oldItem.id, oldItem.image, oldItem.title,
-              oldItem.price, oldItem.quantity + item.quantity);
+              oldItem.price, oldItem.quantity + item.quantity, oldItem.stock);
         } else {
           return oldItem;
         }
@@ -51,8 +51,8 @@ class Cart {
   Cart editItem(CartItem item, int quantity) {
     final newItems = items.map((oldItem) {
       if (oldItem.id == item.id) {
-        return CartItem(
-            oldItem.id, oldItem.image, oldItem.title, oldItem.price, quantity);
+        return CartItem(oldItem.id, oldItem.image, oldItem.title, oldItem.price,
+            quantity, oldItem.stock);
       } else {
         return oldItem;
       }

@@ -4,6 +4,8 @@ class Product {
   final String title;
   final double price;
   final String descripcion;
+  final int stock;
 
-  Product(this.id, this.image, this.title, this.price, this.descripcion);
+  Product(this.id, this.image, this.title, this.price, this.descripcion,
+      this.stock);
 }

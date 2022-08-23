@@ -155,6 +155,6 @@ class ProductInMemoryRepository implements ProductRepository {
 
   Product _parseProducts(Map<String, dynamic> json) {
     return Product(json['id'], json['image'], json['title'], json['price'],
-        json['descripcion']);
+        json['descripcion'], json["stock"]);
   }
 }

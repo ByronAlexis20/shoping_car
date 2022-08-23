@@ -16,6 +16,8 @@ class CartItemState {
   final String title;
   final String price;
   final int quantity;
+  final int stock;
 
-  CartItemState(this.id, this.image, this.title, this.price, this.quantity);
+  CartItemState(
+      this.id, this.image, this.title, this.price, this.quantity, this.stock);
 }

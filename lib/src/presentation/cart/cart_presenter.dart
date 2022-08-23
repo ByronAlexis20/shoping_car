@@ -96,7 +96,8 @@ class CartPresenter {
                 cartItem.image,
                 cartItem.title,
                 formatCurrency.format(cartItem.price),
-                cartItem.quantity))
+                cartItem.quantity,
+                cartItem.stock))
             .toList());
   }
 }

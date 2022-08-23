@@ -11,8 +11,8 @@ class AddProductToCartUseCase {
   Future<Cart> execute(Product product) async {
     final cart = await _cartRepository.get();
 
-    final cartItem =
-        CartItem(product.id, product.image, product.title, product.price, 1);
+    final cartItem = CartItem(product.id, product.image, product.title,
+        product.price, 1, product.stock);
 
     final editedCart = cart.addItem(cartItem);
 

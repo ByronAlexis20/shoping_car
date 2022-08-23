@@ -30,8 +30,13 @@ class CartInMemoryRepository implements CartRepository {
 
   Cart _parse(List<dynamic> json) {
     return Cart(json
-        .map((jsonItem) => CartItem(jsonItem['id'], jsonItem['image'],
-            jsonItem['title'], jsonItem['price'], jsonItem['quantity']))
+        .map((jsonItem) => CartItem(
+            jsonItem['id'],
+            jsonItem['image'],
+            jsonItem['title'],
+            jsonItem['price'],
+            jsonItem['quantity'],
+            jsonItem['stock']))
         .toList());
   }
 }

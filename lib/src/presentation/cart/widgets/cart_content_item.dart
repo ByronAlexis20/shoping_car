@@ -24,7 +24,11 @@ class CartContentItem extends StatelessWidget {
 
     _quantityController.addListener(() {
       final int quantity = int.tryParse(_quantityController.text) ?? 0;
-
+      if (quantity > _cartItemState.stock) {
+        _quantityController.text = '1';
+        _editQuantityOfCartItemCallback(_cartItemState, 1);
+        return;
+      }
       if (quantity != _cartItemState.quantity) {
         _editQuantityOfCartItemCallback(_cartItemState, quantity);
       }
