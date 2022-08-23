@@ -1,5 +1,4 @@
-class ProductsState{
-
+class ProductsState {
   final String searchTerm;
   final List<ProductItemState> products;
 
@@ -11,6 +10,8 @@ class ProductItemState {
   final String image;
   final String title;
   final String price;
+  final String descripcion;
 
-  ProductItemState(this.id, this.image, this.title, this.price);
+  ProductItemState(
+      this.id, this.image, this.title, this.price, this.descripcion);
 }

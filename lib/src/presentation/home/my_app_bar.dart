@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_cart_flutter/src/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopping_cart_flutter/src/presentation/app.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final int _cartItemsCounter;
@@ -14,7 +17,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text("Productos"),
-      actions: <Widget>[shoppingCartIcon(context)],
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            cerrarSesion(context);
+          },
+          child: Text("Salir", style: TextStyle(color: Colors.white)),
+        ),
+        shoppingCartIcon(context),
+      ],
     );
   }
 
@@ -59,5 +70,13 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
+  }
+
+  cerrarSesion(context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+        (Route<dynamic> route) => false);
   }
 }

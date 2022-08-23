@@ -19,7 +19,13 @@ class ProductsPresenter {
 
     return ProductsState(
         searchTerm,
-        products.map((product) => ProductItemState(product.id, product.image,
-            product.title, formatCurrency.format(product.price))).toList());
+        products
+            .map((product) => ProductItemState(
+                product.id,
+                product.image,
+                product.title,
+                formatCurrency.format(product.price),
+                product.descripcion))
+            .toList());
   }
 }
