@@ -8,6 +8,8 @@ import 'package:shopping_cart_flutter/src/presentation/cart/widgets/cart_content
 import 'package:http/http.dart' as http;
 
 class CartContent extends StatelessWidget {
+  static TextEditingController direccionController =
+      new TextEditingController();
   final CartState _cartState;
   final void Function(CartItemState cartItemState, int quantity)
       _editQuantityOfCartItemCallback;
@@ -29,6 +31,19 @@ class CartContent extends StatelessWidget {
             ],
           ),
           Divider(height: 15.0),
+          Card(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: direccionController,
+                  maxLines: 5, //or null
+                  decoration: InputDecoration(
+                    hintText: "Ingrese dirección domiciliaria",
+                    labelText: 'Dirección',
+                  ),
+                ),
+              )),
           RaisedButton(
             hoverColor: Colors.lightBlue,
             child: Container(
@@ -103,9 +118,10 @@ class CartContent extends StatelessWidget {
 
     final dataEnviar = json.decode(data);
     var idcliente = sharedPreferences.getString("idCliente");
+    var direccion = direccionController.text;
     var response = await http.post(
         Uri.parse(
-            "http://localhost:4042/mff-administracion/pedido/generarPedido/$idcliente"),
+            "http://localhost:4042/mff-administracion/pedido/generarPedido/$idcliente/$direccion"),
         body: data);
     if (response.statusCode == 201) {
       Navigator.of(context).pop();
@@ -122,6 +138,7 @@ class CartContent extends StatelessWidget {
           ],
         ),
       );
+      direccionController.text = "";
       _removeItemFromCartCallback(null, 0);
     }
   }

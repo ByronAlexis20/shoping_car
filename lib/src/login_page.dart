@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopping_cart_flutter/src/presentation/app.dart';
+import 'package:shopping_cart_flutter/src/registro_page.dart';
 
 class LoginPage extends StatefulWidget {
   static String id = 'login_page';
@@ -65,6 +66,24 @@ class _LoginPageState extends State<LoginPage> {
               height: 15.0,
             ),
             _buttonLogin(),
+            SizedBox(
+              height: 15.0,
+            ),
+            Row(
+              children: <Widget>[
+                const Text('¿No tiene cuenta?'),
+                TextButton(
+                  child: const Text(
+                    'Registrarse',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () {
+                    _registrarse();
+                  },
+                )
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
+            ),
           ],
         ),
       ),
@@ -147,8 +166,6 @@ class _LoginPageState extends State<LoginPage> {
         body: data);
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
       if (jsonResponse != null) {
         setState(() {
           _isLoading = false;
@@ -171,5 +188,11 @@ class _LoginPageState extends State<LoginPage> {
           gravity: ToastGravity.CENTER,
           backgroundColor: Colors.blue);
     }
+  }
+
+  _registrarse() {
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => RegistroPage()),
+        (Route<dynamic> route) => false);
   }
 }

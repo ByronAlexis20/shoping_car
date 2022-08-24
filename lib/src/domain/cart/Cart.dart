@@ -21,8 +21,11 @@ class Cart {
     if (existedItem != null) {
       final newItems = items.map((oldItem) {
         if (oldItem.id == item.id) {
-          return CartItem(oldItem.id, oldItem.image, oldItem.title,
-              oldItem.price, oldItem.quantity + item.quantity, oldItem.stock);
+          if (oldItem.quantity < oldItem.stock) {
+            return CartItem(oldItem.id, oldItem.image, oldItem.title,
+                oldItem.price, oldItem.quantity + item.quantity, oldItem.stock);
+          }
+          return oldItem;
         } else {
           return oldItem;
         }
